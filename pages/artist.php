@@ -8,14 +8,14 @@
             <form method="GET" action="artist.php">
                 <div class="form-input">
                     <input type="text" id="artistName" name="artistName" required>
-                    <label for="artistName">Artist Name</label>
+                    <label for="artistName">name</label>
                 </div>
                 <br>
-                <input type="submit" name="formSubmit" value="Add Artist"/>
+                <input type="submit" name="formSubmit" value="add artist"/>
             </form>
         </div>
         <div class="content">
-            <h1>ARTISTS</h1>
+            <h1>artists</h1>
 
             <?php
                 require '../php/connect.php';

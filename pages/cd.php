@@ -8,30 +8,30 @@
             <form method="GET" action="cd.php">
                 <div class="form-input">
                     <input type="text" id="cdTitle" name="cdTitle" required>
-                    <label for="cdTitle">Title</label>
+                    <label for="cdTitle">title</label>
                 </div>
                 <br>
                 <div class="form-input">
                     <input type="text" id="artID" name="artID" required>
-                    <label for="artID">Artist</label>
+                    <label for="artID">artist</label>
                 </div>
                 <br>
                 <div class="form-input">
                     <input type="text" id="cdPrice" name="cdPrice" required>
-                    <label for="cdPrice">Price</label>
+                    <label for="cdPrice">price</label>
                 </div>
                 <br>
                 <div class="form-input">
                     <input type="text" id="cdGenre" name="cdGenre" required>
-                    <label for="cdGenre">Genre</label>
+                    <label for="cdGenre">genre</label>
                 </div>
                 <br>
-                <input type="submit" name="formSubmit" value="Add CD"/>
+                <input type="submit" name="formSubmit" value="add cd"/>
             </form>
         </div>
 
         <div class="content">
-            <h1>CDs</h1>
+            <h1>cds</h1>
 
             <?php
                 require '../php/connect.php';
