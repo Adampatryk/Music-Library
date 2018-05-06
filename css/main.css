@@ -26,8 +26,6 @@ h1 {
     -webkit-transition: box-shadow;
     transition: box-shadow 0.2s;
 }
-
-
 #nav-bar-option-wrapper {
     margin: auto;
     width: max-content;
@@ -58,8 +56,8 @@ h1 {
 .content:hover {
     box-shadow: 0 1px 6px 6px lightgrey;
 }
-table {
-    margin: auto;
+.content h1 {
+    text-transform: uppercase;
 }
 .row {
     padding: 10 10px;

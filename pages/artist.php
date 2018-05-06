@@ -1,15 +1,10 @@
 <html>
-    <head>
-        <title>Music Library</title>
-        <link href="../css/main.css" rel="stylesheet" type="text/css"/>
-        <script src="../js/delete.js"></script>
-        <link rel="icon" href="../res/music_library.png"/>
-    </head>
+    <?php require "../php/header.html" ?>
     <body>
         <?php require_once "../php/nav-bar.php"?>
 
         <div class="content">
-            <h1>ADD A NEW ARTIST</h1>
+            <h1>add a new artist</h1>
             <form method="GET" action="artist.php">
                 <div class="form-input">
                     <input type="text" id="artistName" name="artistName" required>
