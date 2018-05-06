@@ -15,7 +15,11 @@ function confirmDelete(id, name, table){
             hiddenForm.setAttribute("action", "../php/deleteCD.php");            
             hiddenField.setAttribute("name", "cdID");
         }
-        
+        else if (table == "track"){
+            hiddenForm.setAttribute("action", "../php/deleteTrack.php");            
+            hiddenField.setAttribute("name", "trackID");
+        }
+
         hiddenField.setAttribute("value", id);
 
         hiddenForm.appendChild(hiddenField);

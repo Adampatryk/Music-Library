@@ -26,7 +26,7 @@
         </div>
 
         <div class="content">
-            <h1>Tracks</h1>
+            <h1>tracks</h1>
 
             <?php
                 require '../php/connect.php';
