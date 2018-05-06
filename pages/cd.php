@@ -1,5 +1,8 @@
 <html>
-    <?php require "../php/header.html" ?>   
+    <?php 
+        require "../php/header.html";   
+        require "../php/timeElapsed.php";
+    ?> 
     <body>
         <?php require_once "../php/nav-bar.php"?>
 
@@ -37,13 +40,14 @@
                 require '../php/connect.php';
 
                 if(isset($_GET['formSubmit'])){
+                    header("Location: cd.php");
 
                     $cdTitle = $_GET['cdTitle'];
                     $artID = $_GET['artID'];
                     $cdPrice = $_GET['cdPrice'];
                     $cdGenre = $_GET['cdGenre'];
 
-                    $sql = "INSERT INTO cd(cdTitle, artID, cdPrice, cdGenre) VALUES ('$cdTitle', '$artID', '$cdPrice', '$cdGenre')";
+                    $sql = "INSERT INTO cd(cdTitle, artID, cdPrice, cdGenre, dateAdded) VALUES ('$cdTitle', '$artID', '$cdPrice', '$cdGenre', now())";
                     mysqli_query($conn, $sql);
                 }
 
@@ -52,8 +56,10 @@
                 while ($row = mysqli_fetch_assoc($result)){
                     $cdID = $row['cdID'];
                     $cdTitle = $row['cdTitle'];
-                    echo "<div class='row'><p>$cdTitle</p>";
-                    echo "<input type='image' src='../res/trashcan.png' onclick='confirmDelete($cdID, \"$cdTitle\", \"cd\")'/>";
+                    echo "<div class='row'><p class='title'>$cdTitle</p>";
+                    echo "<input id=editIcon type='image' src='../res/edit_pencil.png' onclick='confirmDelete($cdID, \"$cdTitle\", \"cd\")'/>";
+                    echo "<input id=deleteIcon type='image' src='../res/trashcan.png' onclick='confirmDelete($cdID, \"$cdTitle\", \"cd\")'/>";
+                    echo "<p class='added>" . timeSince($row['dateAdded']) . "</p>";
                     echo "</div>";
                 }
                 mysqli_close($conn);

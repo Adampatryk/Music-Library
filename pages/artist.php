@@ -1,5 +1,8 @@
 <html>
-    <?php require "../php/header.html" ?>
+    <?php 
+    require "../php/header.html";
+    require "../php/timeElapsed.php";
+    ?>
     <body>
         <?php require_once "../php/nav-bar.php"?>
 
@@ -22,8 +25,9 @@
 
                 if(isset($_GET['formSubmit'])){
                     header("Location: artist.php");
+
                     $artistName = $_GET['artistName'];
-                    $sql = "INSERT INTO artist VALUES (null, '$artistName')";
+                    $sql = "INSERT INTO artist VALUES (null, '$artistName', now())";
                     mysqli_query($conn, $sql);
                 }
                 $sql = "SELECT * FROM artist ORDER BY artist.artName";
@@ -31,8 +35,10 @@
                 while ($row = mysqli_fetch_assoc($result)){
                     $artID = $row['artID'];
                     $artName = $row['artName'];
-                    echo "<div class='row'><p>$artName</p>";
-                    echo "<input type='image' src='../res/trashcan.png' onclick='confirmDelete($artID, \"$artName\", \"artist\")'/>";
+                    echo "<div class='row'><p class='title'>$artName</p>";
+                    echo "<input class=editIcon type='image' src='../res/edit_pencil.png' onclick='confirmDelete($artID, \"$artName\", \"artist\")'/>";
+                    echo "<input class=deleteIcon type='image' src='../res/trashcan.png' onclick='confirmDelete($artID, \"$artName\", \"artist\")'/>";
+                    echo "<p class='added'>" . timeSince($row['dateAdded']) . "</p>";
                     echo "</div>";
                 }
                 mysqli_close($conn);
