@@ -20,30 +20,28 @@
             </form>
         </div>
         <div class="content">
-            <table>
-                <h1>ARTISTS</h1>
+            <h1>ARTISTS</h1>
 
-                <?php
-                    require '../php/connect.php';
+            <?php
+                require '../php/connect.php';
 
-                    if(isset($_GET['formSubmit'])){
-                        $confused = $_GET['formSubmit'];
-                        $artistName = $_GET['artistName'];
-                        $sql = "INSERT INTO artist VALUES (null, '$artistName')";
-                        mysqli_query($conn, $sql);
-                    }
-                    $sql = "SELECT * FROM artist ORDER BY artist.artName";
-                    $result = mysqli_query($conn, $sql);
-                    while ($row = mysqli_fetch_assoc($result)){
-                        $artID = $row['artID'];
-                        $artName = $row['artName'];
-                        echo "<div class='row'><p>$artName</p>";
-                        echo "<input type='image' src='../res/trashcan.png' onclick='confirmDelete($artID, \"$artName\")'/>";
-                        echo "</div>";
-                    }
-                    mysqli_close($conn);
-                ?>
-            </table>
+                if(isset($_GET['formSubmit'])){
+                    header("Location: artist.php");
+                    $artistName = $_GET['artistName'];
+                    $sql = "INSERT INTO artist VALUES (null, '$artistName')";
+                    mysqli_query($conn, $sql);
+                }
+                $sql = "SELECT * FROM artist ORDER BY artist.artName";
+                $result = mysqli_query($conn, $sql);
+                while ($row = mysqli_fetch_assoc($result)){
+                    $artID = $row['artID'];
+                    $artName = $row['artName'];
+                    echo "<div class='row'><p>$artName</p>";
+                    echo "<input type='image' src='../res/trashcan.png' onclick='confirmDelete($artID, \"$artName\", \"artist\")'/>";
+                    echo "</div>";
+                }
+                mysqli_close($conn);
+            ?>
         </div>
     </body>
 </html>

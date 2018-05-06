@@ -1,13 +1,21 @@
-function confirmDelete(id, name){
+function confirmDelete(id, name, table){
     if (confirm("Are you sure you want to delete \'" + name + "\'?")){
 
         var hiddenForm = document.createElement("form");
         hiddenForm.setAttribute("method", "post");
-        hiddenForm.setAttribute("action", "../php/deleteArtist.php");
 
         var hiddenField = document.createElement("input");
         hiddenField.setAttribute("type", "hidden");
-        hiddenField.setAttribute("name", "artID");
+
+        if (table == "artist"){
+            hiddenForm.setAttribute("action", "../php/deleteArtist.php")            
+            hiddenField.setAttribute("name", "artID");
+        }
+        else if (table == "cd"){
+            hiddenForm.setAttribute("action", "../php/deleteCD.php");            
+            hiddenField.setAttribute("name", "cdID");
+        }
+        
         hiddenField.setAttribute("value", id);
 
         hiddenForm.appendChild(hiddenField);
