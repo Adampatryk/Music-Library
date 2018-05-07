@@ -36,12 +36,11 @@
 
             <table id="result">
                 <tr>
-                    <th>title</th>
-                    <th>cd</th>
-                    <th>artist</th>
-                    <th>length</th>
-                    <th>added</th>
-                    <th></th>
+                    <th class="ascending" onclick="sort(0)">title<img src="../res/arrow_up.png"/></th>
+                    <th class="unsorted" onclick="sort(1)">cd<img src=""/></th>
+                    <th class="unsorted" onclick="sort(2)">artist<img src=""/></th>
+                    <th class="unsorted" onclick="sort(3)">length<img src=""/></th>
+                    <th class="unsorted" onclick="sort(4)">added<img src=""/></th>
                     <th></th>
                 </tr>
 
@@ -87,8 +86,8 @@
                         echo "<td>$artName</td>";
                         echo "<td>$trackLength</td>";
                         echo "<td>$timeElapsed</td>";
-                        echo "<td><input class=editIcon type='image' src='../res/edit_pencil.png' onclick='confirmDelete($trackID, \"$trackTitle\", \"track\")'/></td>";
-                        echo "<td><input class=deleteIcon type='image' src='../res/trashcan.png' onclick='confirmDelete($trackID, \"$trackTitle\", \"track\")'/></td>";
+                        echo "<td><input class=editIcon type='image' src='../res/trashcan.png' onclick='confirmDelete($trackID, \"$trackTitle\", \"track\")'/>";
+                        echo "<input class=deleteIcon type='image' src='../res/edit_pencil.png' onclick='confirmDelete($trackID, \"$trackTitle\", \"track\")'/></td>";
                         
                         echo "</tr>";
                     }

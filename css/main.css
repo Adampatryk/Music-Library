@@ -70,6 +70,11 @@ th {
     font-weight: 100;
     color: gray;
 }
+th img {
+}
+th:hover{
+    opacity: 0.5;
+}
 tr {
     padding: 10 10px;
     font-size: 20px;

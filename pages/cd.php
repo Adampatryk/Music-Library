@@ -40,12 +40,11 @@
 
             <table id="result">
                 <tr>
-                    <th>title</th>
-                    <th>artist</th>
-                    <th>price</th>
-                    <th>genre</th>
-                    <th>added</th>
-                    <th></th>
+                    <th class="ascending" onclick="sort(0)">title<img src="../res/arrow_up.png"/></th>
+                    <th class="unsorted" onclick="sort(1)">artist<img src=""/></th>
+                    <th class="unsorted" onclick="sort(2)">price<img src=""/></th>
+                    <th class="unsorted" onclick="sort(3)">genre<img src=""/></th>
+                    <th class="unsorted" onclick="sort(4)">added<img src=""/></th>
                     <th></th>
                 </tr>
 
@@ -64,7 +63,7 @@
                         mysqli_query($conn, $sql);
                     }
 
-                    $sql = "SELECT * FROM cd";
+                    $sql = "SELECT * FROM cd ORDER BY cdTitle";
                     $result = mysqli_query($conn, $sql);
                     while ($row = mysqli_fetch_assoc($result)){
 
@@ -87,8 +86,8 @@
                         echo "<td>$cdGenre</td>";
                         echo "<td>$timeElapsed</td>";
 
-                        echo "<td><input id=editIcon type='image' src='../res/edit_pencil.png' onclick='confirmDelete($cdID, \"$cdTitle\", \"cd\")'/></td>";
-                        echo "<td><input id=deleteIcon type='image' src='../res/trashcan.png' onclick='confirmDelete($cdID, \"$cdTitle\", \"cd\")'/></td>";
+                        echo "<td><input id=editIcon type='image' src='../res/trashcan.png' onclick='confirmDelete($cdID, \"$cdTitle\", \"cd\")'/>";
+                        echo "<input id=deleteIcon type='image' src='../res/edit_pencil.png' onclick='confirmDelete($cdID, \"$cdTitle\", \"cd\")'/></td>";
                      
                         echo "</tr>";
                     }

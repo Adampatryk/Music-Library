@@ -29,9 +29,8 @@
 
             <table id="result">
                 <tr>
-                    <th>name</th>
-                    <th>added</th>
-                    <th></th>
+                    <th class="ascending" onclick="sort(0)">name<img src="../res/arrow_up.png"/></th>
+                    <th class="unsorted" onclick="sort(1)">added<img src=""/></th>
                     <th></th>
                 </tr>
 
@@ -43,7 +42,7 @@
                         $sql = "INSERT INTO artist VALUES (null, '$artistName', now())";
                         mysqli_query($conn, $sql);
                     }
-                    $sql = "SELECT * FROM artist";
+                    $sql = "SELECT * FROM artist ORDER BY artName";
                     if (isset($_GET['searchText'])){
                         $searchText = $_GET['searchText'];
                         $sql = $sql . " WHERE artName LIKE '%$searchText%'";
@@ -57,8 +56,8 @@
 
                         echo "<td>$artName</td>";
                         echo "<td>" . timeSince($row['dateAdded']) . "</td>";
-                        echo "<td><input class=editIcon type='image' src='../res/edit_pencil.png' onclick='confirmDelete($artID, \"$artName\", \"artist\")'/></td>";
-                        echo "<td><input class=deleteIcon type='image' src='../res/trashcan.png' onclick='confirmDelete($artID, \"$artName\", \"artist\")'/></td>";
+                        echo "<td><input class=editIcon type='image' src='../res/trashcan.png' onclick='confirmDelete($artID, \"$artName\", \"artist\")'/>";
+                        echo "<input class=deleteIcon type='image' src='../res/edit_pencil.png' onclick='confirmDelete($artID, \"$artName\", \"artist\")'/></td>";
                         
                         echo "</tr>";
 
