@@ -4,8 +4,11 @@
     require "../php/timeElapsed.php";
     ?>
     <body>
-        <?php require_once "../php/nav-bar.php"?>
-        <?php require_once "../php/search-bar.php";?>
+        <?php 
+        
+            require_once "../php/nav-bar.php";
+            require '../php/connect.php';
+        ?>
 
         <div class="content">
             <h1>add a new artist</h1>
@@ -18,10 +21,13 @@
                 <input type="submit" name="addArtist" value="add artist"/>
             </form>
         </div>
+        
         <div class="content">
             <h1>artists</h1>
 
-            <table>
+            <?php require_once "../php/search-bar.php"?>
+
+            <table id="result">
                 <tr>
                     <th>name</th>
                     <th>added</th>
@@ -30,8 +36,6 @@
                 </tr>
 
                 <?php
-                    require '../php/connect.php';
-
                     if(isset($_GET['addArtist'])){
                         header("Location: artist.php");
 
@@ -39,7 +43,11 @@
                         $sql = "INSERT INTO artist VALUES (null, '$artistName', now())";
                         mysqli_query($conn, $sql);
                     }
-                    $sql = "SELECT * FROM artist ORDER BY artist.artName";
+                    $sql = "SELECT * FROM artist";
+                    if (isset($_GET['searchText'])){
+                        $searchText = $_GET['searchText'];
+                        $sql = $sql . " WHERE artName LIKE '%$searchText%'";
+                    }
                     $result = mysqli_query($conn, $sql);
                     while ($row = mysqli_fetch_assoc($result)){
                         $artID = $row['artID'];
@@ -53,6 +61,7 @@
                         echo "<td><input class=deleteIcon type='image' src='../res/trashcan.png' onclick='confirmDelete($artID, \"$artName\", \"artist\")'/></td>";
                         
                         echo "</tr>";
+
                     }
                     mysqli_close($conn);
                 ?>

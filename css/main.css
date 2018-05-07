@@ -101,7 +101,7 @@ form {
 }
 form > .form-input {
     position: relative;
-    margin: 20px 0;
+    margin:20px 0;
     background-color: transparent;
 }
 form > .form-input > label {

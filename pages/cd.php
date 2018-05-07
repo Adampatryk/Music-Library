@@ -5,7 +5,6 @@
     ?> 
     <body>
         <?php require_once "../php/nav-bar.php"?>
-        <?php require_once "../php/search-bar.php";?>
 
         <div class="content">
             <h1>add a new cd</h1>
@@ -37,7 +36,9 @@
         <div class="content">
             <h1>cds</h1>
 
-            <table>
+            <?php require_once "../php/search-bar.php"?>
+
+            <table id="result">
                 <tr>
                     <th>title</th>
                     <th>artist</th>
@@ -63,7 +64,7 @@
                         mysqli_query($conn, $sql);
                     }
 
-                    $sql = "SELECT * FROM cd ORDER BY cd.cdTitle";
+                    $sql = "SELECT * FROM cd";
                     $result = mysqli_query($conn, $sql);
                     while ($row = mysqli_fetch_assoc($result)){
 

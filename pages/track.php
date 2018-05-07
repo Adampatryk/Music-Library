@@ -5,7 +5,6 @@
     ?>
     <body>
         <?php require_once "../php/nav-bar.php";?>
-        <?php require_once "../php/search-bar.php";?>
 
         <div class="content">
             <h1>add a new track</h1>
@@ -29,10 +28,13 @@
             </form>
         </div>
 
+
         <div class="content">
             <h1>tracks</h1>
 
-            <table>
+            <?php require_once "../php/search-bar.php";?>
+
+            <table id="result">
                 <tr>
                     <th>title</th>
                     <th>cd</th>
