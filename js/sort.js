@@ -31,7 +31,6 @@ function sort(col) {
     var headers = table.getElementsByTagName("th");
     for (var h = 0; h < headers.length; h++){
         if (h != col && headers[h].getElementsByTagName("img")[0]){
-            headers[h].getElementsByTagName("img")[0].src="";
             headers[h].className="unsorted"
         }
     }

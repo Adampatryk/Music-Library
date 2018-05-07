@@ -12,7 +12,7 @@
 
         <div class="content">
             <h1>add a new artist</h1>
-            <form method="GET" action="artist.php">
+            <form name="addArtistForm" method="GET" action="artist.php" onsubmit="return validateForm('addArtistForm')">
                 <div class="form-input">
                     <input type="text" id="artistName" name="artistName" required>
                     <label for="artistName">name</label>
@@ -30,7 +30,7 @@
             <table id="result">
                 <tr>
                     <th class="ascending" onclick="sort(0)">name<img src="../res/arrow_up.png"/></th>
-                    <th class="unsorted" onclick="sort(1)">added<img src=""/></th>
+                    <th class="unsorted" onclick="sort(1)">added<img src="../res/arrow_up.png"/></th>
                     <th></th>
                 </tr>
 
@@ -57,7 +57,7 @@
                         echo "<td>$artName</td>";
                         echo "<td>" . timeSince($row['dateAdded']) . "</td>";
                         echo "<td><input class=editIcon type='image' src='../res/trashcan.png' onclick='confirmDelete($artID, \"$artName\", \"artist\")'/>";
-                        echo "<input class=deleteIcon type='image' src='../res/edit_pencil.png' onclick='confirmDelete($artID, \"$artName\", \"artist\")'/></td>";
+                        echo "<input class=deleteIcon type='image' src='../res/edit_pencil.png' onclick='window.location=\"/pages/viewArtist.php?edit=true&id=$artID\"'/></td>";
                         
                         echo "</tr>";
 

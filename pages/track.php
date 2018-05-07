@@ -8,7 +8,7 @@
 
         <div class="content">
             <h1>add a new track</h1>
-            <form method="GET" action="track.php">
+            <form name="addTrackForm" method="GET" action="track.php" onsubmit="return validateForm('addTrackForm')">
                 <div class="form-input">
                     <input type="text" id="trackTitle" name="trackTitle" required>
                     <label for="trackTitle">title</label>
@@ -37,10 +37,10 @@
             <table id="result">
                 <tr>
                     <th class="ascending" onclick="sort(0)">title<img src="../res/arrow_up.png"/></th>
-                    <th class="unsorted" onclick="sort(1)">cd<img src=""/></th>
-                    <th class="unsorted" onclick="sort(2)">artist<img src=""/></th>
-                    <th class="unsorted" onclick="sort(3)">length<img src=""/></th>
-                    <th class="unsorted" onclick="sort(4)">added<img src=""/></th>
+                    <th class="unsorted" onclick="sort(1)">cd<img src="../res/arrow_up.png"/></th>
+                    <th class="unsorted" onclick="sort(2)">artist<img src="../res/arrow_up.png"/></th>
+                    <th class="unsorted" onclick="sort(3)">length<img src="../res/arrow_up.png"/></th>
+                    <th class="unsorted" onclick="sort(4)">added<img src="../res/arrow_up.png"/></th>
                     <th></th>
                 </tr>
 
