@@ -22,7 +22,7 @@ h1 {
     width: 100%;
     padding-top: 30px;
     padding-bottom:30px;
-    background-color: rgb(82, 82, 82);   
+    background-color: gray;   
     -webkit-transition: box-shadow;
     transition: box-shadow 0.2s;
 }
@@ -45,8 +45,8 @@ h1 {
 }
 .nav-bar-option:hover, body#index-body a.index-link, body#cd-body a.cd-link, body#artist-body a.artist-link, body#track-body a.track-link{
     border-radius: 0;
-    color: white;
-    background-color: rgb(126, 126, 126); 
+    color: gray;
+    background-color: lightgray; 
 }
 .content {
     transition: box-shadow 0.2s;
@@ -60,50 +60,39 @@ h1 {
 .content h1 {
     text-transform: uppercase;
 }
-.row {
+table {
+    border-collapse: collapse;
+    width:100%;
+}
+th {
+    text-align: left;
+    text-transform: uppercase;
+    font-weight: 100;
+    color: gray;
+}
+tr {
     padding: 10 10px;
     font-size: 20px;
     position: relative;
-    border-top: 1px solid black; 
+    border-bottom: 1px solid black; 
 }
-.row:last-child {
-    border-bottom: 1px solid black;
-}
-.row:hover {
+tr:hover {
     background-color: rgb(223, 223, 223);
 }
-.row p {
-    margin:0;
-    width:30%;
+tr:first-child:hover {
+    background-color: rgb(243, 243, 243);
 }
-.row p.title {
-    display: inline-block;
-    position: relative;
-    white-space: nowrap;
-    max-width: 80%;
-    overflow: hidden;
-    text-overflow: ellipsis;
+tr input {
+    opacity:0;
+    float:right;
 }
-.row p.added{
-    
-}
-.row input {
-    position: absolute;
-    opacity: 0;
-    right: 10px;
-    top:-10px;
-    transform: translateY(45%);
-}
-.row input.editIcon{
-    right:45px;
-} 
-.row:hover input {
+tr:hover input {
     opacity: 0.5;
 }
-.row input:hover {
+tr input:hover {
     opacity: 1;
 }
-.row input:focus {
+tr input:focus {
     outline: none;
     border: none;
 }

@@ -22,7 +22,7 @@
             if ($time < $interval) continue;
             $numberOfInterval = floor($time / $interval);
 
-            return $numberOfInterval.' '.$text.(($numberOfInterval>1)?'s':'');
+            return $numberOfInterval.' '.$text.(($numberOfInterval>1)?'s':'') . ' ago';
         }
 
     }
