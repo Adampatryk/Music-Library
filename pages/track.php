@@ -79,7 +79,7 @@
                         $trackLength = $row['trackLength'];
                         $timeElapsed = timeSince($row['dateAdded']);
 
-                        echo "<tr>";
+                        echo "<tr onclick='window.location=\"/pages/viewTrack.php?id=$trackID\"'>";
 
                         echo "<td>$trackTitle</td>";
                         echo "<td>$cdTitle</td>";

@@ -82,7 +82,7 @@
                         $cdGenre = $row['cdGenre'];
                         $timeElapsed = timeSince($row['dateAdded']);
 
-                        echo "<tr>";
+                        echo "<tr onclick='window.location=\"/pages/viewCD.php?id=$cdID\"'>";
 
                         echo "<td>$cdTitle</td>";
                         echo "<td>$artName</td>";
@@ -92,7 +92,7 @@
                         echo "<td>$timeElapsed</td>";
 
                         echo "<td><input id=editIcon type='image' src='../res/trashcan.png' onclick='confirmDelete($cdID, \"$cdTitle\", \"cd\")'/>";
-                        echo "<input id=deleteIcon type='image' src='../res/edit_pencil.png' onclick='window.location=\"/pages/viewArtist.php?edit=true&id=$artID\"'/></td>";
+                        echo "<input id=deleteIcon type='image' src='../res/edit_pencil.png' onclick='window.location=\"/pages/viewCD.php?edit=true&id=$cdID\"'/></td>";
                      
                         echo "</tr>";
                     }

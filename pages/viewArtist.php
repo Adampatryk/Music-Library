@@ -13,7 +13,7 @@
                 $artID = $_GET['id'];
                 $newArtName = $_GET['artName'];
 
-                header("Location: viewArtist.php?edit=false&id=$artID");
+                header("Location: viewArtist.php?&id=$artID");
 
                 $sql = "UPDATE artist SET artName = '$newArtName' WHERE artID = $artID";
                 mysqli_query($conn, $sql);

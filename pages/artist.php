@@ -52,8 +52,8 @@
                         $artID = $row['artID'];
                         $artName = $row['artName'];
 
-                        echo "<tr>";
-
+                        echo "<tr onclick='window.location=\"/pages/viewArtist.php?id=$artID\"'>";
+                        
                         echo "<td>$artName</td>";
                         echo "<td>" . timeSince($row['dateAdded']) . "</td>";
                         echo "<td><input class=editIcon type='image' src='../res/trashcan.png' onclick='confirmDelete($artID, \"$artName\", \"artist\")'/>";

@@ -1,6 +1,5 @@
 function validateForm(formName){
-
-    var form = document.forms[formName];
+    var form = document.getElementsByTagName('form')[0];
     var inputs, x;
     if (formName == "addCDForm"){
         inputs = form.getElementsByTagName("input");
@@ -15,11 +14,11 @@ function validateForm(formName){
         }
 
         x = inputs['cdGenre'].value;
-        if (!/^[A-za-z]+$/.test(x)){
+        if (!/^[A-za-z\s]+$/.test(x)){
             alert("Genre should contain alphabetic characters only.");
             return false;
         } 
 
     }
-    return True;
+    return true;
 }
