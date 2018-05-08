@@ -22,7 +22,8 @@
                         SET cdTitle = '$newCDTitle',
                         cdPrice = '$newCDPrice',
                         cdGenre = '$newCDGenre',
-                        artID = $newArtID        
+                        artID = $newArtID,
+                        dateAdded=dateAdded  
                         WHERE cdID = $cdID";
 
                 echo mysqli_query($conn, $sql);

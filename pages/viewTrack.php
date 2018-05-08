@@ -19,7 +19,8 @@
                 $sql = "UPDATE track
                         SET trackTitle = '$newTrackTitle',
                         trackLength = '$newTrackLength',
-                        cdID = '$newTrackCDID'
+                        cdID = '$newTrackCDID',
+                        dateAdded=dateAdded
                         WHERE trackID = $trackID";
 
                 mysqli_query($conn, $sql);

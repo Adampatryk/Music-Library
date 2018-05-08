@@ -54,6 +54,12 @@ h1 {
     padding: 5px 100px 20px 100px;
     background-color: rgb(243, 243, 243);
 }
+.table-wrapper {
+	width: 100%;
+	overflow-y: auto;
+	_overflow: auto;
+	margin: 0 0 1em;
+}
 .content:hover {
     box-shadow: 0 1px 6px 6px lightgrey;
 }
@@ -64,6 +70,7 @@ h1 {
 table {
     border-collapse: collapse;
     width:100%;
+    overflow: hidden;
 }
 td, th{
     padding: 10px;
@@ -96,7 +103,10 @@ tr:first-child:hover {
 }
 tr input {
     opacity:0;
-    float:right;
+    float: right;
+    margin: 0;
+    width:30px;
+    height:30px;
 }
 tr:hover input {
     opacity: 0.5;
