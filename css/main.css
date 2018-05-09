@@ -145,7 +145,7 @@ form {
     transition: font-size 0.2s, color 0.2s, bottom 0.2s;
     -webkit-transition: font-size 0.2s, color 0.2s, bottom 0.2s;
 }
-.form-input select {
+form select {
     padding: 4px 5px;
     width: 200px;
 }
@@ -169,10 +169,11 @@ form > input[type=submit] {
     position: relative;
     margin-top: 20px;
 }
-form[name='edit'] input, .content p.output{
+form[name='edit'] input[type=text], .content p.output{
     margin: 0;
     padding: 5px;
     margin-bottom: 10px;
+    width: 200px;
 }
 form[name='edit'] input[name='id'] {
     color: gray;

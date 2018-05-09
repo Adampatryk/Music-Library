@@ -61,11 +61,11 @@
                         ?>
 
                         <form name="edit" method="GET" action="viewCD.php" onsubmit="return validateForm('addCDForm')">
-                            <p class='label'>cd id:</p><input type="text" name="id" value='<?php echo $cdID ?>' readonly="readonly"/><br>
-                            <p class='label'>title: </p><input type="text" name='cdTitle' value='<?php echo $cdTitle ?>'/> <br>
-                            <p class='label'>artist: </p><input type="text" name='artID' value='<?php echo $artID ?>'/> <br>
-                            <p class='label'>price: </p><input type="text" name='cdPrice' value='<?php echo $cdPrice ?>'/> <br>
-                            <p class='label'>genre: </p><input type="text" name='cdGenre' value='<?php echo $cdGenre ?>'/> <br>
+                            <p class='label'>cd id:</p><input type="text" name="id" value='<?php echo $cdID ?>' readonly="readonly" required/ required><br>
+                            <p class='label'>title: </p><input type="text" name='cdTitle' value='<?php echo $cdTitle ?>' required/> <br>
+                            <p class='label'>artist: </p><input type="text" name='artID' value='<?php echo $artID ?>' required/> <br>
+                            <p class='label'>price: </p><input type="text" name='cdPrice' value='<?php echo $cdPrice ?>' required/> <br>
+                            <p class='label'>genre: </p><input type="text" name='cdGenre' value='<?php echo $cdGenre ?>' required/> <br>
 
                             <input type="checkbox" name="updateTime" value="update" checked/><span>Update Date Added</span><br>
                             <input type="submit" name="save" value="save"/>

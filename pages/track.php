@@ -3,7 +3,7 @@
         require "../php/header.html";
         require "../php/timeElapsed.php";
         require '../php/connect.php';
-        
+
         if(isset($_GET['addTrack'])){
             header("Location: track.php");
 
@@ -28,7 +28,7 @@
                 <br>
                 <div class="form-input">
                     <input type="text" id="trackLength" name="trackLength" required>
-                    <label for="trackLength">length(s)</label>
+                    <label for="trackLength">length(hh:mm:ss)</label>
                 </div>
                 <br>
                 <div class="form-input">
@@ -36,14 +36,18 @@
                     <select name="cdID">
                         <option disabled selected value="">select cd</option>
                         <?php
-                            $sql = "SELECT cdID, cdTitle FROM cd ORDER BY cdTitle";
+                            $sql = "SELECT cdID, cdTitle, artName 
+                                    FROM cd, artist 
+                                    WHERE cd.artID = artist.artID
+                                    ORDER BY artName";
                             $result = mysqli_query($conn, $sql);
 
                             while ($row = mysqli_fetch_assoc($result)){
                                 $cdID = $row['cdID'];
                                 $cdTitle = $row['cdTitle'];
+                                $artName = $row['artName'];
                         ?>
-                                <option value=<?php echo $cdID?>> <?php echo $cdTitle?> </option> 
+                                <option value=<?php echo $cdID?>> <?php echo $cdTitle?> - <?php echo $artName ?> </option> 
 
                         <?php
                             }

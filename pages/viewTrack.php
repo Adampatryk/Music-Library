@@ -60,10 +60,29 @@
                         ?>
 
                         <form name="edit" method="GET" action="viewTrack.php" onsubmit="return validateForm('addTrackForm')">
-                            <p class='label'>track id:</p><input type="text" name="id" value='<?php echo $trackID ?>' readonly="readonly"/><br>
-                            <p class='label'>title: </p><input type="text" name='trackTitle' value='<?php echo $trackTitle ?>'/> <br>
-                            <p class='label'>cd title: </p><input type="text" name='cdID' value='<?php echo $cdID ?>'/> <br>
-                            <p class='label'>length: </p><input type="text" name='trackLength' value='<?php echo $trackLength ?>'/> <br>
+                            <p class='label'>track id:</p><input type="text" name="id" value='<?php echo $trackID ?>' readonly="readonly" required/><br>
+                            <p class='label'>title: </p><input type="text" name='trackTitle' value='<?php echo $trackTitle ?>' required/> <br>
+                            <p class='label'>cd title: </p>
+                            <select name="cdID">
+                                <?php
+                                    $sql = "SELECT cdID, cdTitle, artName 
+                                            FROM cd, artist 
+                                            WHERE cd.artID = artist.artID
+                                            ORDER BY artName";
+                                    $result = mysqli_query($conn, $sql);
+
+                                    while ($row = mysqli_fetch_assoc($result)){
+                                        $tmpcdID = $row['cdID'];
+                                        $cdTitle = $row['cdTitle'];
+                                        $artName = $row['artName'];
+                                ?>
+                                        <option value=<?php echo $tmpcdID; if($tmpcdID == $cdID){echo ' selected';};?>> <?php echo $cdTitle?> - <?php echo $artName ?> </option> 
+
+                                <?php
+                                    }
+                                ?> 
+                            </select>
+                            <p class='label'>length: </p><input type="text" name='trackLength' value='<?php echo $trackLength ?>' required/> <br>
 
                             <input type="checkbox" name="updateTime" value="update" checked/><span>Update Date Added</span><br>
                             <input type="submit" name="save" value="save"/>
