@@ -39,8 +39,9 @@
                 <table id="result">
                     <tr> 
                         <th class="ascending" onclick="sort(0)">name<img src="../res/arrow_up.png"/></th>
-                        <th class="unsorted" onclick="sort(1)">tracks<img src="../res/arrow_up.png"/></th>
-                        <th class="unsorted" onclick="sort(2)">added<img src="../res/arrow_up.png"/></th>
+                        <th class="unsorted" onclick="sort(1)">cds<img src="../res/arrow_up.png"/></th>
+                        <th class="unsorted" onclick="sort(2)">tracks<img src="../res/arrow_up.png"/></th>
+                        <th class="unsorted" onclick="sort(3)">added<img src="../res/arrow_up.png"/></th>
                         <th></th>
                     </tr>
 
@@ -60,11 +61,17 @@
                                     AND cd.artID = $artID";
 
                             $artTracks = mysqli_fetch_assoc(mysqli_query($conn, $sql))['artTracks'];
+
+                            $sql = "SELECT COUNT(*) as artCDS
+                                    FROM cd
+                                    WHERE cd.artID = $artID";
+                            $artCDS = mysqli_fetch_assoc(mysqli_query($conn, $sql))['artCDS'];
                     ?>
 
                             <tr onclick='window.location="/pages/viewArtist.php?id=<?php echo $artID ?>"'>
                             
-                            <td> <?php echo $artName ?> </td>
+                            <td> <?php echo $artName ?> </td>                            
+                            <td> <?php echo $artCDS ?> </td>
                             <td> <?php echo $artTracks ?> </td>
                             <td> <span hidden><?php echo $dateAdded?> </span><?php echo timeSince($dateAdded) ?> </td>
                             <td><input class='editIcon' type='image' src='../res/trashcan.png' onclick='confirmDelete(<?php echo $artID ?>, <?php echo "$artName" ?>, "artist"); event.stopPropagation();'/>
