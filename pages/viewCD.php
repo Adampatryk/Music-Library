@@ -131,8 +131,8 @@
                                 echo "<td>$artName</td>";
                                 echo "<td>$trackLength</td>";
                                 echo "<td>$timeElapsed</td>";                        
-                                echo "<td><input class=editIcon type='image' src='../res/trashcan.png' onclick='confirmDelete($trackID, \"$trackTitle\", \"track\"); event.stopPropagation();'/>";
-                                echo "<input class=deleteIcon type='image' src='../res/edit_pencil.png' onclick='window.location=\"/pages/viewTrack.php?edit=true&id=$trackID\"; event.stopPropagation();'/></td>";
+                                echo "<td><input class='icon' type='image' src='../res/trashcan.png' onclick='confirmDelete($trackID, \"$trackTitle\", \"track\"); event.stopPropagation();'/>";
+                                echo "<input class='icon' type='image' src='../res/edit_pencil.png' onclick='window.location=\"/pages/viewTrack.php?edit=true&id=$trackID\"; event.stopPropagation();'/></td>";
                                 
                                 echo "</tr>";
                             }

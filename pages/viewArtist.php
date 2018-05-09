@@ -107,8 +107,8 @@
                                     <td> <?php echo $artName ?> </td>
                                     <td> <?php echo $trackLength ?> </td>
                                     <td> <?php echo $timeElapsed ?> </td>
-                                    <td> <input class=editIcon type='image' src='../res/trashcan.png' onclick='confirmDelete(<?php echo $trackID?>, <?php echo "$trackTitle" ?>, "track")'/>
-                                    <input class=deleteIcon type='image' src='../res/edit_pencil.png' onclick='confirmDelete(<?php echo $trackID?>, <?php echo "$trackTitle" ?>, "track")'/></td>
+                                    <td> <input class='icon' type='image' src='../res/trashcan.png' onclick='confirmDelete(<?php echo $trackID?>, <?php echo "$trackTitle" ?>, "track")'/>
+                                    <input class='icon' type='image' src='../res/edit_pencil.png' onclick='confirmDelete(<?php echo $trackID?>, <?php echo "$trackTitle" ?>, "track")'/></td>
                                 
                                 </tr>
                             <?php 

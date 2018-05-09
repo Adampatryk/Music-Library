@@ -109,8 +109,8 @@
                             echo "<td>$cdTracks</td>";
                             echo "<td>$timeElapsed</td>";
 
-                            echo "<td><input id=editIcon type='image' src='../res/trashcan.png' onclick='confirmDelete($cdID, \"$cdTitle\", \"cd\"); event.stopPropagation();'/>";
-                            echo "<input id=deleteIcon type='image' src='../res/edit_pencil.png' onclick='window.location=\"/pages/viewCD.php?edit=true&id=$cdID\"; event.stopPropagation();'/></td>";
+                            echo "<td><input id='icon' type='image' src='../res/trashcan.png' onclick='confirmDelete($cdID, \"$cdTitle\", \"cd\"); event.stopPropagation();'/>";
+                            echo "<input id='icon' type='image' src='../res/edit_pencil.png' onclick='window.location=\"/pages/viewCD.php?edit=true&id=$cdID\"; event.stopPropagation();'/></td>";
                         
                             echo "</tr>";
                         }
