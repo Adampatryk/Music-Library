@@ -2,6 +2,18 @@
     <?php 
         require "../php/header.html";
         require "../php/timeElapsed.php";
+        require '../php/connect.php';
+        
+        if(isset($_GET['addTrack'])){
+            header("Location: track.php");
+
+            $trackTitle = $_GET['trackTitle'];
+            $trackLength = $_GET['trackLength'];
+            $cdID = $_GET['cdID'];
+
+            $sql = "INSERT INTO track(trackTitle, trackLength, cdID, dateAdded) VALUES ('$trackTitle', '$trackLength', $cdID, now())";
+            mysqli_query($conn, $sql);
+        }
     ?>
     <body>
         <?php require_once "../php/nav-bar.php";?>
@@ -20,10 +32,24 @@
                 </div>
                 <br>
                 <div class="form-input">
-                    <input type="text" id="cdID" name="cdID" required>
-                    <label for="cdID">cd</label>
-                </div>
-                <br>
+                <p>cd</p>
+                    <select name="cdID">
+                        <option disabled selected value="">select cd</option>
+                        <?php
+                            $sql = "SELECT cdID, cdTitle FROM cd ORDER BY cdTitle";
+                            $result = mysqli_query($conn, $sql);
+
+                            while ($row = mysqli_fetch_assoc($result)){
+                                $cdID = $row['cdID'];
+                                $cdTitle = $row['cdTitle'];
+                        ?>
+                                <option value=<?php echo $cdID?>> <?php echo $cdTitle?> </option> 
+
+                        <?php
+                            }
+                        ?> 
+                    </select>
+                </div> 
                 <input type="submit" name="addTrack" value="add track"/>
             </form>
         </div>
@@ -46,18 +72,6 @@
                     </tr>
 
                     <?php
-                        require '../php/connect.php';
-
-                        if(isset($_GET['addTrack'])){
-                            header("Location: track.php");
-
-                            $trackTitle = $_GET['trackTitle'];
-                            $trackLength = $_GET['trackLength'];
-                            $cdID = $_GET['cdID'];
-
-                            $sql = "INSERT INTO track(trackTitle, trackLength, cdID, dateAdded) VALUES ('$trackTitle', '$trackLength', $cdID, now())";
-                            mysqli_query($conn, $sql);
-                        }
 
                         $sql = "SELECT * FROM track ORDER BY track.trackTitle";
                         $result = mysqli_query($conn, $sql);
@@ -75,22 +89,24 @@
                             $sql = "SELECT artist.artName FROM artist WHERE artID = $artID";
                             $artName = mysqli_fetch_assoc(mysqli_query($conn, $sql))['artName'];
 
-
-
                             $trackLength = $row['trackLength'];
-                            $timeElapsed = timeSince($row['dateAdded']);
+                            $dateAdded = $row['dateAdded'];
+                            $timeElapsed = timeSince($dateAdded);
+                    
+                    ?>
 
-                            echo "<tr onclick='window.location=\"/pages/viewTrack.php?id=$trackID\"'>";
+                            <tr onclick='window.location=\"/pages/viewTrack.php?id=$trackID\"'>
 
-                            echo "<td>$trackTitle</td>" ;
-                            echo "<td>$cdTitle</td>";
-                            echo "<td>$artName</td>";
-                            echo "<td>$trackLength</td>";
-                            echo "<td>$timeElapsed</td>";                        
-                            echo "<td><input class=editIcon type='image' src='../res/trashcan.png' onclick='confirmDelete($trackID, \"$trackTitle\", \"track\"); event.stopPropagation();'/>";
-                            echo "<input class=deleteIcon type='image' src='../res/edit_pencil.png' onclick='window.location=\"/pages/viewTrack.php?edit=true&id=$trackID\"; event.stopPropagation();'/></td>";
+                            <td> <?php echo $trackTitle ?> </td>
+                            <td> <?php echo $cdTitle ?> </td>
+                            <td> <?php echo $artName ?> </td>
+                            <td> <?php echo $trackLength ?> </td>
+                            <td> <span hidden><?php echo $dateAdded?></span><?php echo $timeElapsed ?> </td>                     
+                            <td> <input class=editIcon type='image' src='../res/trashcan.png' onclick='confirmDelete( <?php echo $trackID?>, "<?php echo $trackTitle?>", "track"); event.stopPropagation();'/>
+                            <input class=deleteIcon type='image' src='../res/edit_pencil.png' onclick='window.location="/pages/viewTrack.php?edit=true&id= <?php echo $trackID?>"; event.stopPropagation();'/></td>
                             
-                            echo "</tr>";
+                            </tr>
+                    <?php 
                         }
                         mysqli_close($conn);
                     ?>

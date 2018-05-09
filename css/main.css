@@ -130,6 +130,12 @@ form {
     margin:20px 0;
     background-color: transparent;
 }
+.form-input p {
+    font-size: inherit;
+    text-transform: uppercase;
+    color: gray;
+    margin:0;
+}
 .form-input > label {
     text-transform: uppercase;
     position: absolute;
@@ -139,9 +145,14 @@ form {
     transition: font-size 0.2s, color 0.2s, bottom 0.2s;
     -webkit-transition: font-size 0.2s, color 0.2s, bottom 0.2s;
 }
+.form-input select {
+    padding: 4px 5px;
+    width: 200px;
+}
 .form-input > input[type=text] {
+    width: 200px;
     position: absolute;
-    z-index: 999;
+    z-index: 1;
     background-color: transparent;
     border: none;
     border-bottom: 1px solid lightgray;

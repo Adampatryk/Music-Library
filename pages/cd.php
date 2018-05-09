@@ -2,9 +2,24 @@
     <?php 
         require "../php/header.html";   
         require "../php/timeElapsed.php";
+        require '../php/connect.php';
+
+        if(isset($_GET['addCD'])){
+            header("Location: cd.php");
+            
+            $cdTitle = $_GET['cdTitle'];
+            $artID = $_GET['artID'];
+            $cdPrice = $_GET['cdPrice'];
+            $cdGenre = $_GET['cdGenre'];
+
+            $sql = "INSERT INTO cd(cdTitle, artID, cdPrice, cdGenre, dateAdded) VALUES ('$cdTitle', '$artID', '$cdPrice', '$cdGenre', now())";
+            mysqli_query($conn, $sql);
+        }
     ?> 
     <body>
-        <?php require_once "../php/nav-bar.php"?>
+        <?php 
+            require_once "../php/nav-bar.php";
+        ?>
 
         <div class="content">
             <h1>add a new cd</h1>
@@ -15,10 +30,25 @@
                 </div>
                 <br>
                 <div class="form-input">
-                    <input type="text" id="artID" name="artID" required>
-                    <label for="artID">artist</label>
+                    <p>artist</p>
+                    <select name="artID">
+                        <option disabled selected value="" required>select artist</option>
+                        <?php
+                            $sql = "SELECT artID, artName FROM artist ORDER BY artName";
+                            $result = mysqli_query($conn, $sql);
+
+                            while ($row = mysqli_fetch_assoc($result)){
+                                $artID = $row['artID'];
+                                $artName = $row['artName'];
+                        ?>
+
+                                <option value=<?php echo $artID?>> <?php echo $artName?> </option> 
+
+                        <?php
+                            }
+                        ?> 
+                    </select>
                 </div>
-                <br>
                 <div class="form-input">
                     <input type="text" id="cdPrice" name="cdPrice" required>
                     <label for="cdPrice">price</label>
@@ -51,19 +81,6 @@
                     </tr>
 
                     <?php
-                        require '../php/connect.php';
-
-                        if(isset($_GET['addCD'])){
-                            header("Location: cd.php");
-
-                            $cdTitle = $_GET['cdTitle'];
-                            $artID = $_GET['artID'];
-                            $cdPrice = $_GET['cdPrice'];
-                            $cdGenre = $_GET['cdGenre'];
-
-                            $sql = "INSERT INTO cd(cdTitle, artID, cdPrice, cdGenre, dateAdded) VALUES ('$cdTitle', '$artID', '$cdPrice', '$cdGenre', now())";
-                            mysqli_query($conn, $sql);
-                        }
 
                         $sql = "SELECT * FROM cd ORDER BY cdTitle";
                         $result = mysqli_query($conn, $sql);

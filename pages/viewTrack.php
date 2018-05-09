@@ -79,7 +79,7 @@
                         <p class='label'>added: </p><p class='output'><?php echo timeSince($dateAdded)?></p>
                         
                         <input type="button" name="edit" value="edit" onclick="window.location='/pages/viewTrack.php?edit=true&id=<?php echo $trackID ?>'"/>                    
-                        <input type="button" name="back" value="back" onclick="window.location='/pages/track.php'"/>
+                        <input type="button" name="back" value="back to tracks" onclick="window.location='/pages/track.php'"/>
                     <?php
                     }
                     mysqli_close($conn);

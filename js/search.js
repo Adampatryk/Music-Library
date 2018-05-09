@@ -7,7 +7,7 @@ function searchFunc() {
     for (i = 0; i < rows.length; i++) {
 
         td = rows[i].getElementsByTagName("td");
-        for(x = 0; x < td.length; x++){
+        for(x = 0; x < td.length-1; x++){
             if (td[x]) {
                 if (td[x].innerHTML.toUpperCase().indexOf(searchText) > -1) {
                     rows[i].style.display = "";

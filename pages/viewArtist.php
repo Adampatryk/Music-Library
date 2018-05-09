@@ -59,61 +59,63 @@
                 <p class='label'>artist name: </p> <p class='output'><?php echo $artName?></p>
                 <p class='label'>added: </p> <p class='output'><?php echo timeSince($dateAdded)?></p>
                 <input type="button" name="edit" value="edit" onclick="window.location='/pages/viewArtist.php?edit=true&id=<?php echo $artID ?>'"/>                    
-                <input type="button" name="back" value="back" onclick="window.location='/pages/artist.php'"/>
+                <input type="button" name="back" value="back to artists" onclick="window.location='/pages/artist.php'"/>
                              
             </div>
                 <div class="content">
-                    <h1>tracks by <?php echo $artName ?></h1>
+                    <h1>tracks by '<?php echo $artName ?>'</h1>
                     
-                    <table id="result">
-                        <tr>
-                            <th class="ascending" onclick="sort(0)">title<img src="../res/arrow_up.png"/></th>
-                            <th class="unsorted" onclick="sort(1)">cd<img src="../res/arrow_up.png"/></th>
-                            <th class="unsorted" onclick="sort(2)">artist<img src="../res/arrow_up.png"/></th>
-                            <th class="unsorted" onclick="sort(3)">length<img src="../res/arrow_up.png"/></th>
-                            <th class="unsorted" onclick="sort(4)">added<img src="../res/arrow_up.png"/></th>
-                            <th></th>
-                        </tr>
-
-                        <?php
-                            $sql = "SELECT * 
-                                    FROM track, cd 
-                                    WHERE track.cdID = cd.cdID 
-                                    AND cd.artID = $artID 
-                                    ORDER BY track.trackTitle";
-                            $result = mysqli_query($conn, $sql);
-                            while ($row = mysqli_fetch_assoc($result)){
-
-                                $trackID = $row['trackID'];
-                                $trackTitle = $row['trackTitle'];
-
-                                $cdID = $row['cdID'];
-                                $sql = "SELECT cd.artID, cd.cdTitle FROM cd WHERE cdID = $cdID";
-                                $tmpResult = mysqli_fetch_assoc(mysqli_query($conn, $sql));
-                                $cdTitle = $tmpResult['cdTitle'];
-                                
-                                $artID = $tmpResult['artID'];
-                                $sql = "SELECT artist.artName FROM artist WHERE artID = $artID";
-                                $artName = mysqli_fetch_assoc(mysqli_query($conn, $sql))['artName'];
-
-                                $trackLength = $row['trackLength'];
-                                $timeElapsed = timeSince($row['dateAdded']);
-                        ?>
-
-                            <tr onclick="window.location='/pages/viewTrack.php?id=<?php echo $trackID ?>'">
-                                <td> <?php echo $trackTitle ?> </td>
-                                <td> <?php echo $cdTitle ?> </td>
-                                <td> <?php echo $artName ?> </td>
-                                <td> <?php echo $trackLength ?> </td>
-                                <td> <?php echo $timeElapsed ?> </td>
-                                <td> <input class=editIcon type='image' src='../res/trashcan.png' onclick='confirmDelete(<?php echo $trackID?>, <?php echo "$trackTitle" ?>, "track")'/>
-                                <input class=deleteIcon type='image' src='../res/edit_pencil.png' onclick='confirmDelete(<?php echo $trackID?>, <?php echo "$trackTitle" ?>, "track")'/></td>
-                            
+                    <div class="table-wrapper">
+                        <table id="result">
+                            <tr>
+                                <th class="ascending" onclick="sort(0)">title<img src="../res/arrow_up.png"/></th>
+                                <th class="unsorted" onclick="sort(1)">cd<img src="../res/arrow_up.png"/></th>
+                                <th class="unsorted" onclick="sort(2)">artist<img src="../res/arrow_up.png"/></th>
+                                <th class="unsorted" onclick="sort(3)">length<img src="../res/arrow_up.png"/></th>
+                                <th class="unsorted" onclick="sort(4)">added<img src="../res/arrow_up.png"/></th>
+                                <th></th>
                             </tr>
-                        <?php 
-                            } 
-                        ?>
-                    </table>
+
+                            <?php
+                                $sql = "SELECT * 
+                                        FROM track, cd 
+                                        WHERE track.cdID = cd.cdID 
+                                        AND cd.artID = $artID 
+                                        ORDER BY track.trackTitle";
+                                $result = mysqli_query($conn, $sql);
+                                while ($row = mysqli_fetch_assoc($result)){
+
+                                    $trackID = $row['trackID'];
+                                    $trackTitle = $row['trackTitle'];
+
+                                    $cdID = $row['cdID'];
+                                    $sql = "SELECT cd.artID, cd.cdTitle FROM cd WHERE cdID = $cdID";
+                                    $tmpResult = mysqli_fetch_assoc(mysqli_query($conn, $sql));
+                                    $cdTitle = $tmpResult['cdTitle'];
+                                    
+                                    $artID = $tmpResult['artID'];
+                                    $sql = "SELECT artist.artName FROM artist WHERE artID = $artID";
+                                    $artName = mysqli_fetch_assoc(mysqli_query($conn, $sql))['artName'];
+
+                                    $trackLength = $row['trackLength'];
+                                    $timeElapsed = timeSince($row['dateAdded']);
+                            ?>
+
+                                <tr onclick="window.location='/pages/viewTrack.php?id=<?php echo $trackID ?>'">
+                                    <td> <?php echo $trackTitle ?> </td>
+                                    <td> <?php echo $cdTitle ?> </td>
+                                    <td> <?php echo $artName ?> </td>
+                                    <td> <?php echo $trackLength ?> </td>
+                                    <td> <?php echo $timeElapsed ?> </td>
+                                    <td> <input class=editIcon type='image' src='../res/trashcan.png' onclick='confirmDelete(<?php echo $trackID?>, <?php echo "$trackTitle" ?>, "track")'/>
+                                    <input class=deleteIcon type='image' src='../res/edit_pencil.png' onclick='confirmDelete(<?php echo $trackID?>, <?php echo "$trackTitle" ?>, "track")'/></td>
+                                
+                                </tr>
+                            <?php 
+                                } 
+                            ?>
+                        </table>
+                    </div>
                 </div>
             <?php
                 }

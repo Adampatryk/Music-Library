@@ -61,11 +61,11 @@
                         ?>
 
                         <form name="edit" method="GET" action="viewCD.php" onsubmit="return validateForm('addCDForm')">
-                            <p class='label'>CD ID:</p><input type="text" name="id" value='<?php echo $cdID ?>' readonly="readonly"/><br>
-                            <p class='label'>Title: </p><input type="text" name='cdTitle' value='<?php echo $cdTitle ?>'/> <br>
-                            <p class='label'>Artist: </p><input type="text" name='artID' value='<?php echo $artID ?>'/> <br>
-                            <p class='label'>Price: </p><input type="text" name='cdPrice' value='<?php echo $cdPrice ?>'/> <br>
-                            <p class='label'>Genre: </p><input type="text" name='cdGenre' value='<?php echo $cdGenre ?>'/> <br>
+                            <p class='label'>cd id:</p><input type="text" name="id" value='<?php echo $cdID ?>' readonly="readonly"/><br>
+                            <p class='label'>title: </p><input type="text" name='cdTitle' value='<?php echo $cdTitle ?>'/> <br>
+                            <p class='label'>artist: </p><input type="text" name='artID' value='<?php echo $artID ?>'/> <br>
+                            <p class='label'>price: </p><input type="text" name='cdPrice' value='<?php echo $cdPrice ?>'/> <br>
+                            <p class='label'>genre: </p><input type="text" name='cdGenre' value='<?php echo $cdGenre ?>'/> <br>
 
                             <input type="checkbox" name="updateTime" value="update" checked/><span>Update Date Added</span><br>
                             <input type="submit" name="save" value="save"/>
@@ -73,20 +73,73 @@
                         </form>
 
                     <?php } else { ?>
-                        <p class='label'>CD ID: </p><p class='output'><?php echo $cdID?></p>
-                        <p class='label'>Title: </p><p class='output'><?php echo $cdTitle?></p>
-                        <p class='label'>Artist: </p><p class='output'><?php echo $cdArtist?></p>
-                        <p class='label'>Price: </p><p class='output'><?php echo $cdPrice?></p>
-                        <p class='label'>Genre: </p><p class='output'><?php echo $cdGenre?></p>
-                        <p class='label'>Tracks: </p><p class='output'><?php echo $cdTracks?></p>
-                        <p class='label'>Added: </p><p class='output'><?php echo timeSince($dateAdded)?></p>
+                        <p class='label'>cd id: </p><p class='output'><?php echo $cdID?></p>
+                        <p class='label'>title: </p><p class='output'><?php echo $cdTitle?></p>
+                        <p class='label'>artist: </p><p class='output'><?php echo $cdArtist?></p>
+                        <p class='label'>price: </p><p class='output'><?php echo $cdPrice?></p>
+                        <p class='label'>genre: </p><p class='output'><?php echo $cdGenre?></p>
+                        <p class='label'>tracks: </p><p class='output'><?php echo $cdTracks?></p>
+                        <p class='label'>added: </p><p class='output'><?php echo timeSince($dateAdded)?></p>
                         
                         <input type="button" name="edit" value="edit" onclick="window.location='/pages/viewCD.php?edit=true&id=<?php echo $cdID ?>'"/>                    
-                        <input type="button" name="back" value="back" onclick="window.location='/pages/cd.php'"/>
+                        <input type="button" name="back" value="back to cds" onclick="window.location='/pages/cd.php'"/>
                     <?php
                     }
-                    mysqli_close($conn);
                 ?>
+            </div>
+
+            <div class="content">
+                <h1>tracks in '<?php echo $cdTitle ?>'</h1>
+
+                <div class="table-wrapper">
+                    <table id="result">
+                        <tr>
+                            <th class="ascending" onclick="sort(0)">title<img src="../res/arrow_up.png"/></th>
+                            <th class="unsorted" onclick="sort(1)">cd<img src="../res/arrow_up.png"/></th>
+                            <th class="unsorted" onclick="sort(2)">artist<img src="../res/arrow_up.png"/></th>
+                            <th class="unsorted" onclick="sort(3)">length<img src="../res/arrow_up.png"/></th>
+                            <th class="unsorted" onclick="sort(4)">added<img src="../res/arrow_up.png"/></th>
+                            <th></th>
+                        </tr>
+
+                        <?php
+
+                            $sql = "SELECT * FROM track WHERE cdID=$cdID ORDER BY track.trackTitle";
+                            $result = mysqli_query($conn, $sql);
+
+                            while ($row = mysqli_fetch_assoc($result)){
+
+                                $trackID = $row['trackID'];
+                                $trackTitle = $row['trackTitle'];
+
+                                $cdID = $row['cdID'];
+                                $sql = "SELECT cd.artID, cd.cdTitle FROM cd WHERE cdID = $cdID";
+                                $tmpResult = mysqli_fetch_assoc(mysqli_query($conn, $sql));
+                                $cdTitle = $tmpResult['cdTitle'];
+                                
+                                $artID = $tmpResult['artID'];
+                                $sql = "SELECT artist.artName FROM artist WHERE artID = $artID";
+                                $artName = mysqli_fetch_assoc(mysqli_query($conn, $sql))['artName'];
+
+                                $trackLength = $row['trackLength'];
+                                $timeElapsed = timeSince($row['dateAdded']);
+
+                                echo "<tr onclick='window.location=\"/pages/viewTrack.php?id=$trackID\"'>";
+
+                                echo "<td>$trackTitle</td>" ;
+                                echo "<td>$cdTitle</td>";
+                                echo "<td>$artName</td>";
+                                echo "<td>$trackLength</td>";
+                                echo "<td>$timeElapsed</td>";                        
+                                echo "<td><input class=editIcon type='image' src='../res/trashcan.png' onclick='confirmDelete($trackID, \"$trackTitle\", \"track\"); event.stopPropagation();'/>";
+                                echo "<input class=deleteIcon type='image' src='../res/edit_pencil.png' onclick='window.location=\"/pages/viewTrack.php?edit=true&id=$trackID\"; event.stopPropagation();'/></td>";
+                                
+                                echo "</tr>";
+                            }
+                            mysqli_close($conn);
+                        ?>
+                    </table>
+                </div>
             </div>
         
     </body>

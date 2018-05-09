@@ -2,12 +2,19 @@
     <?php 
     require "../php/header.html";
     require "../php/timeElapsed.php";
+    require '../php/connect.php';
+
+    if(isset($_GET['addArtist'])){
+        header("Location: artist.php");
+
+        $artistName = $_GET['artistName'];
+        $sql = "INSERT INTO artist VALUES (null, '$artistName', now())";
+        mysqli_query($conn, $sql);
+    }
     ?>
     <body>
         <?php 
-        
             require_once "../php/nav-bar.php";
-            require '../php/connect.php';
         ?>
 
         <div class="content">
@@ -17,6 +24,7 @@
                     <input type="text" id="artistName" name="artistName" required>
                     <label for="artistName">name</label>
                 </div>
+                <input type="hidden" id="artID" name="artID"/>
                 <br>
                 <input type="submit" name="addArtist" value="add artist"/>
             </form>
@@ -37,19 +45,14 @@
                     </tr>
 
                     <?php
-                        if(isset($_GET['addArtist'])){
-                            header("Location: artist.php");
-
-                            $artistName = $_GET['artistName'];
-                            $sql = "INSERT INTO artist VALUES (null, '$artistName', now())";
-                            mysqli_query($conn, $sql);
-                        }
+                        
                         $sql = "SELECT * FROM artist ORDER BY artName";
                         $result = mysqli_query($conn, $sql);
 
                         while ($row = mysqli_fetch_assoc($result)){
                             $artID = $row['artID'];
                             $artName = $row['artName'];
+                            $dateAdded = $row['dateAdded'];
 
                             $sql = "SELECT COUNT(*) AS artTracks  
                                     FROM track, cd 
@@ -63,7 +66,7 @@
                             
                             <td> <?php echo $artName ?> </td>
                             <td> <?php echo $artTracks ?> </td>
-                            <td> <?php echo timeSince($row['dateAdded']) ?> </td>
+                            <td> <span hidden><?php echo $dateAdded?> </span><?php echo timeSince($dateAdded) ?> </td>
                             <td><input class='editIcon' type='image' src='../res/trashcan.png' onclick='confirmDelete(<?php echo $artID ?>, <?php echo "$artName" ?>, "artist"); event.stopPropagation();'/>
                             <input class='deleteIcon' type='image' src='../res/edit_pencil.png' onclick='window.location="/pages/viewArtist.php?edit=true&id=<?php echo $artID ?>"; event.stopPropagation();'/></td>
                             
