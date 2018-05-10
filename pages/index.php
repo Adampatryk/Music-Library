@@ -12,7 +12,10 @@
             ) AS cdCount, 
             (
             SELECT COUNT(*) FROM track
-            ) AS trackCount";
+            ) AS trackCount,
+            (
+            SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(trackLength))) FROM track
+            ) AS totalLength";
 
         $result = mysqli_query($conn, $sql);
         $counts = mysqli_fetch_assoc($result);
@@ -23,6 +26,8 @@
         echo "There are " . $counts['cdCount'] . " CDs.";
         echo "<br>";
         echo "There are " . $counts['trackCount'] , " tracks.";
+        echo "<br>";
+        echo "Total length of all tracks: " . $counts['totalLength'];
         echo "<div/>";
 
         mysqli_close($conn);
