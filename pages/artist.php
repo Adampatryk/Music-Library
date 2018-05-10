@@ -7,7 +7,7 @@
     if(isset($_GET['addArtist'])){
         header("Location: artist.php");
 
-        $artistName = $_GET['artistName'];
+        $artistName = mysqli_real_escape_string($_GET['artistName']);
         $sql = "INSERT INTO artist VALUES (null, '$artistName', now())";
         mysqli_query($conn, $sql);
     }
@@ -24,7 +24,7 @@
             <h1>add a new artist</h1>
             <form name="addArtistForm" method="GET" action="artist.php" onsubmit="return validateForm('addArtistForm')">
                 <div class="form-input">
-                    <input type="text" id="artistName" name="artistName" required>
+                    <input type="text" id="artistName" name="artistName" required maxlength="32">
                     <label for="artistName">name</label>
                 </div>
                 <input type="hidden" id="artID" name="artID"/>

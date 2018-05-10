@@ -26,7 +26,7 @@
             <h1>add a new cd</h1>
             <form name="addCDForm" method="GET" action="cd.php" onsubmit="return validateForm('addCDForm')">
                 <div class="form-input">
-                    <input type="text" id="cdTitle" name="cdTitle" required>
+                    <input type="text" id="cdTitle" name="cdTitle" required maxlength="32">
                     <label for="cdTitle">title</label>
                 </div>
                 <br>
@@ -56,7 +56,7 @@
                 </div>
                 <br>
                 <div class="form-input">
-                    <input type="text" id="cdGenre" name="cdGenre" required>
+                    <input type="text" id="cdGenre" name="cdGenre" required maxlength="32">
                     <label for="cdGenre">genre</label>
                 </div>
                 <br>

@@ -19,8 +19,9 @@ function validateForm(formName){
         } else {valid = false};
 
         x = inputs['cdGenre'].value;
-        valid = validateGenre(x);
-
+        if (!validateGenre(x)){
+            valid=false;
+        }
     }
     else if (formName == "addTrackForm"){
         x = inputs['trackLength'].value;
@@ -96,7 +97,7 @@ function validatePrice(price){
 }
 
 function validateGenre(genre){
-    if (!/^[A-Za-z\s]+$/.test(x)){
+    if (!/^[A-Za-z\s]+$/.test(genre)){
         alert("Genre should contain alphabetic characters only.");
         return false;
     } 

@@ -18,10 +18,10 @@
                 $newArtID = $_GET['artID'];
 
                 header("Location: viewCD.php?&id=$cdID");
-
+                
                 $sql = "UPDATE cd 
                         SET cdTitle = '$newCDTitle',
-                        cdPrice = '$newCDPrice',
+                        cdPrice = $newCDPrice,
                         cdGenre = '$newCDGenre',
                         artID = $newArtID,
                         dateAdded=dateAdded  
@@ -63,10 +63,26 @@
 
                         <form name="edit" method="GET" action="viewCD.php" onsubmit="return validateForm('addCDForm')">
                             <p class='label'>cd id:</p><input type="text" name="id" value='<?php echo $cdID ?>' readonly="readonly" required/ required><br>
-                            <p class='label'>title: </p><input type="text" name='cdTitle' value='<?php echo $cdTitle ?>' required/> <br>
-                            <p class='label'>artist: </p><input type="text" name='artID' value='<?php echo $artID ?>' required/> <br>
+                            <p class='label'>title: </p><input type="text" name='cdTitle' value='<?php echo $cdTitle ?>' required maxlength="32"/> <br>
+                            <p class='label'>artist: </p>
+                            <select name="artID">
+                                <?php
+                                    $sql = "SELECT artID, artName FROM artist ORDER BY artName";
+                                    $result = mysqli_query($conn, $sql);
+
+                                    while ($row = mysqli_fetch_assoc($result)){
+                                        $tmpartID = $row['artID'];
+                                        $artName = $row['artName'];
+                                ?>
+
+                                        <option value=<?php echo $tmpartID; if($tmpartID == $artID){echo ' selected';};?> > <?php echo $artName?> </option> 
+
+                                <?php
+                                    }
+                                ?> 
+                            </select>
                             <p class='label'>price: </p><input type="text" name='cdPrice' value='<?php echo $cdPrice ?>' required/> <br>
-                            <p class='label'>genre: </p><input type="text" name='cdGenre' value='<?php echo $cdGenre ?>' required/> <br>
+                            <p class='label'>genre: </p><input type="text" name='cdGenre' value='<?php echo $cdGenre ?>' required maxlength="32"/> <br>
 
                             <input type="checkbox" name="updateTime" value="update" checked/><span>Update Date Added</span><br>
                             <input type="submit" name="save" value="save"/>

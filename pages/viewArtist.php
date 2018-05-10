@@ -48,7 +48,7 @@
 
                 <form name="edit" method="GET" action="viewArtist.php" onsubmit="return validateForm('addArtistForm')">
                     <p class='label'>id:</p><input type="text" name="id" value='<?php echo $artID ?>' readonly="readonly" required/><br>
-                    <p class='label'>artist name: </p><input type="text" name='artName' value='<?php echo $artName ?>'required/> <br>
+                    <p class='label'>artist name: </p><input type="text" name='artName' value='<?php echo $artName ?>'required maxlength="32"/> <br>
                     <input type="checkbox" name="updateTime" value="update" checked/><span>Update Date Added</span><br>
                     <input type="submit" name="save" value="save"/>
                     <input type="button" name="cancel" value="cancel" onclick="window.location='/pages/viewArtist.php?edit=false&id=<?php echo $artID?>'"/>
