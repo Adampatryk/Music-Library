@@ -11,8 +11,11 @@
         $sql = "INSERT INTO artist VALUES (null, '$artistName', now())";
         mysqli_query($conn, $sql);
     }
+    
     ?>
     <body>
+        <script src="../js/scroll.js"></script>
+        
         <?php 
             require_once "../php/nav-bar.php";
         ?>
@@ -74,7 +77,7 @@
                             <td> <?php echo $artCDS ?> </td>
                             <td> <?php echo $artTracks ?> </td>
                             <td> <span hidden><?php echo $dateAdded?> </span><?php echo timeSince($dateAdded) ?> </td>               
-                            <td> <input class='icon' type='image' src='../res/trashcan.png' onclick='confirmDelete( <?php echo $artID?>, "<?php echo $artName?>", "artist"); event.stopPropagation();'/>
+                            <td> <input class='icon' type='image' src='../res/trashcan.png' onclick='document.cookie = "scrollPos=" + document.body.scrollTop; confirmDelete( <?php echo $artID?>, "<?php echo $artName?>", "artist"); event.stopPropagation();'/>
                             <input class='icon' type='image' src='../res/edit_pencil.png' onclick='window.location="/pages/viewArtist.php?edit=true&id= <?php echo $artID?>"; event.stopPropagation();'/></td>
                             
                             </tr>

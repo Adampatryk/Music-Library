@@ -4,6 +4,7 @@
         require "../php/timeElapsed.php";
     ?>
     <body>
+        <script src="../js/scroll.js"></script>
         <?php 
              
             require_once "../php/nav-bar.php";
@@ -123,18 +124,19 @@
 
                                 $trackLength = $row['trackLength'];
                                 $timeElapsed = timeSince($row['dateAdded']);
+                        ?>
+                                <tr onclick='window.location="/pages/viewTrack.php?id=<?php echo $trackID?>"'>
 
-                                echo "<tr onclick='window.location=\"/pages/viewTrack.php?id=$trackID\"'>";
-
-                                echo "<td>$trackTitle</td>" ;
-                                echo "<td>$cdTitle</td>";
-                                echo "<td>$artName</td>";
-                                echo "<td>$trackLength</td>";
-                                echo "<td>$timeElapsed</td>";                        
-                                echo "<td><input class='icon' type='image' src='../res/trashcan.png' onclick='confirmDelete($trackID, \"$trackTitle\", \"track\"); event.stopPropagation();'/>";
-                                echo "<input class='icon' type='image' src='../res/edit_pencil.png' onclick='window.location=\"/pages/viewTrack.php?edit=true&id=$trackID\"; event.stopPropagation();'/></td>";
+                                <td><?php echo $trackTitle ?></td>
+                                <td><?php echo $cdTitle?></td>
+                                <td><?php echo $artName?></td>
+                                <td><?php echo $trackLength?></td>
+                                <td><?php echo $timeElapsed?></td>                     
+                                <td><input class='icon' type='image' src='../res/trashcan.png' onclick='document.cookie = "scrollPos=" + document.body.scrollTop; confirmDelete(<?php echo $trackID?>, "<?php echo $trackTitle?>", "track"); event.stopPropagation();'/>
+                                <input class='icon' type='image' src='../res/edit_pencil.png' onclick='window.location="/pages/viewTrack.php?edit=true&id=<?php echo $trackID?>"; event.stopPropagation();'/></td>
                                 
-                                echo "</tr>";
+                                </tr>
+                        <?php
                             }
                             mysqli_close($conn);
                         ?>

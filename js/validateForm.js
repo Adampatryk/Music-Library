@@ -22,7 +22,7 @@ function validateForm(formName){
         valid = validateGenre(x);
 
     }
-    if (formName == "addTrackForm"){
+    else if (formName == "addTrackForm"){
         x = inputs['trackLength'].value;
         x = validateTrackLength(x);
         if (x){
@@ -80,7 +80,7 @@ function validateTrackLength(length){
             return false;
         }
     }
-
+    //alert("" + hours + "hours " + mins + "mins " + secs + "secs");
     length = "" + hours + ":" + mins + ":" + secs;
     return length;
 }
@@ -96,7 +96,7 @@ function validatePrice(price){
 }
 
 function validateGenre(genre){
-    if (!/^[A-za-z\s]+$/.test(x)){
+    if (!/^[A-Za-z\s]+$/.test(x)){
         alert("Genre should contain alphabetic characters only.");
         return false;
     } 

@@ -4,6 +4,7 @@ function searchFunc() {
     searchText = searchBox.value.toUpperCase();
     table = document.getElementById("result");
     rows = table.getElementsByTagName("tr");
+    
     for (i = 0; i < rows.length; i++) {
 
         td = rows[i].getElementsByTagName("td");

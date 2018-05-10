@@ -4,6 +4,7 @@
     require "../php/timeElapsed.php";
     ?>
     <body>
+        <script src="../js/scroll.js"></script>
         <?php 
             
             require_once "../php/nav-bar.php";
@@ -107,8 +108,8 @@
                                     <td> <?php echo $artName ?> </td>
                                     <td> <?php echo $trackLength ?> </td>
                                     <td> <?php echo $timeElapsed ?> </td>
-                                    <td> <input class='icon' type='image' src='../res/trashcan.png' onclick='confirmDelete(<?php echo $trackID?>, <?php echo "$trackTitle" ?>, "track")'/>
-                                    <input class='icon' type='image' src='../res/edit_pencil.png' onclick='confirmDelete(<?php echo $trackID?>, <?php echo "$trackTitle" ?>, "track")'/></td>
+                                    <td> <input class='icon' type='image' src='../res/trashcan.png' onclick='document.cookie = "scrollPos=" + document.body.scrollTop; confirmDelete(<?php echo $trackID?>, <?php echo "$trackTitle" ?>, "track")'/>
+                                    <input class='icon' type='image' src='../res/edit_pencil.png' onclick=window.location="/pages/viewTrack.php?edit=true&id= <?php echo $trackID?>"; event.stopPropagation();'/></td>
                                 
                                 </tr>
                             <?php 

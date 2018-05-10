@@ -1,4 +1,5 @@
 <?php
+
     header("Location: ../pages/artist.php");
     require "connect.php";
 
@@ -7,4 +8,5 @@
     $result = mysqli_query($conn, $sql);
 
     mysqli_close($conn);
+
 ?>
