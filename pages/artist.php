@@ -7,7 +7,7 @@
     if(isset($_GET['addArtist'])){
         header("Location: artist.php");
 
-        $artistName = mysqli_real_escape_string($_GET['artistName']);
+        $artistName = $_GET['artistName'];
         $sql = "INSERT INTO artist VALUES (null, '$artistName', now())";
         mysqli_query($conn, $sql);
     }

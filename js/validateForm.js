@@ -87,8 +87,8 @@ function validateTrackLength(length){
 }
 
 function validatePrice(price){
-    if (isNaN(price)){
-        alert("Price must be a number.");
+    if (isNaN(price) || Number(price) < 0){
+        alert("Price must be a positive number.");
         return false;
     } else {
         price = price.toFixed(2);

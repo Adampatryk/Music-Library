@@ -5,13 +5,6 @@ body {
     background-color: rgb(223, 223, 223);
     font-family: Arial, Helvetica, sans-serif;
 }
-#logo {
-    height: 50px;
-    width: 50px;
-    position: absolute;
-    left: 10px;
-    margin:auto;
-}
 h1 {
     font-size: 40px;
     padding: 0;

@@ -21,14 +21,20 @@
         $counts = mysqli_fetch_assoc($result);
 
         echo "<div class=content>";
-        echo "There are " . $counts['artistCount'] . " artists.";
-        echo "<br>";
-        echo "There are " . $counts['cdCount'] . " CDs.";
-        echo "<br>";
-        echo "There are " . $counts['trackCount'] , " tracks.";
-        echo "<br>";
-        echo "Total length of all tracks: " . $counts['totalLength'];
-        echo "<div/>";
+        echo "<h2> There are " . $counts['artistCount'] . " artists.</h2>";
+        echo "</div>";
+
+        echo "<div class=content>";
+        echo "<h2> There are " . $counts['cdCount'] . " CDs.</h2>";
+        echo "</div>";
+
+        echo "<div class=content>";
+        echo "<h2> There are " . $counts['trackCount'] , " tracks.</h2>";
+        echo "</div>";
+
+        echo "<div class=content>";
+        echo "<h2> Total length of all tracks: " . $counts['totalLength'] . "</h2>";
+        echo "</div>";
 
         mysqli_close($conn);
     ?>

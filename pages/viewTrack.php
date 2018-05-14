@@ -15,6 +15,7 @@
                 $newTrackLength = $_GET['trackLength'];
                 $newTrackCDID = $_GET['cdID'];
 
+                header("Location: viewTrack.php?id=$trackID");
 
                 $sql = "UPDATE track
                         SET trackTitle = '$newTrackTitle',
